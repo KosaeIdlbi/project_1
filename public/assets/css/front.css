@@ -1,0 +1,1916 @@
+body {
+    font-family: "Cairo", sans-serif;
+    background-color: #f8f9fa;
+}
+.nav-link {
+    color: #495057;
+    font-weight: 600;
+}
+.nav-link:hover {
+    color: #0d6efd;
+}
+/* تنسيق زر المستخدم لتبدو كزر بروفايل */
+.btn-user-profile {
+    background-color: #e9ecef;
+    color: #212529;
+    border: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 50px;
+}
+.btn-user-profile:hover {
+    background-color: #dee2e6;
+}
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+body {
+    font-family: "Cairo", sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* تنسيق بطاقة المنتج */
+.product-card {
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* حاوية الصورة */
+.card-img-wrapper {
+    position: relative;
+    padding-top: 100%; /* نسبة ارتفاع 1:1 */
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.card-img-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* لضمان ملء الصورة بشكل جميل */
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .card-img-top {
+    transform: scale(1.05); /* تأثير تقريب بسيط عند التحويم */
+}
+
+/* شارة "مميز" في الزاوية */
+.badge-featured {
+    position: absolute;
+    top: 15px;
+    right: 15px; /* في اليمين لأننا RTL */
+    background-color: #ffc107;
+    color: #000;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* محتوى البطاقة */
+.card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.product-title:hover {
+    color: var(--bs-primary);
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+}
+
+/* زر إضافة للسلة */
+.btn-add-cart {
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    margin-top: auto; /* يدفع الزر لأسفل البطاقة دائماً */
+}
+
+/* ترويسة القسم */
+.section-header {
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--bs-primary);
+    border-radius: 2px;
+}
+/* الحاوية الرئيسية للشريط */
+.scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    /* منع الانتقال لسطر جديد */
+    overflow-x: auto;
+    /* تفعيل التمرير الأفقي */
+    gap: 20px;
+    /* مسافة بين البطاقات */
+    padding-bottom: 20px;
+    /* مسافة للشريط السفلي إن وجد */
+
+    /* إخفاء شريط التمرير الافتراضي للمتصفح لمظهر أنيق */
+    -webkit-overflow-scrolling: touch;
+    /* سلاسة على الموبايل */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE */
+}
+
+.scrolling-wrapper-flexbox::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+/* تحديد عرض كل بطاقة داخل الشريط */
+.card-scroll-item {
+    flex: 0 0 auto;
+    /* عدم التمدد */
+    width: 260px;
+    /* عرض ثابت للبطاقة */
+}
+
+/* للشاشات الكبيرة جداً يمكن زيادة العرض قليلاً */
+@media (min-width: 992px) {
+    .card-scroll-item {
+        width: 280px;
+    }
+}
+
+/* =========================================
+   تصميم زر المفضلة العائم (Floating Fav)
+   ========================================= */
+
+/* التنسيقات الأساسية المشتركة بين الحالتين */
+.btn-fav-active,
+.btn-fav-inactive {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.3rem;
+    border: 2px solid transparent;
+
+    /* تثبيت المكان (يعتمد على position: relative في الأب) */
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 20; /* لضمان ظهوره فوق الصورة والشارات */
+    padding: 0; /* إزالة الحشو الافتراضي للأزرار */
+}
+
+/* =========================================
+   1. الحالة: مطفأ (غير مضاف للمفضلة)
+   ========================================= */
+.btn-fav-inactive {
+    background-color: #ffffff;
+    color: #9ca3af; /* لون رمادي فاتح للأيقونة */
+    border-color: #e5e7eb; /* حدود رمادية فاتحة */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn-fav-inactive:hover {
+    color: #dc2626; /* يتحول للأحمر عند التحويم */
+    background-color: #fef2f2; /* خلفية وردية فاتحة جداً */
+    transform: scale(1.1); /* تكبير بسيط */
+}
+
+/* =========================================
+   2. الحالة: مفعّل (مضاف للمفضلة)
+   ========================================= */
+.btn-fav-active {
+    background-color: #fee2e2; /* خلفية وردية */
+    color: #dc2626; /* لون أحمر داكن للأيقونة */
+    border-color: #dc2626; /* حدود حمراء */
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1); /* هالة حمراء خفيفة */
+}
+
+.btn-fav-active:hover {
+    background-color: #fecaca; /* وردية أغمق عند التحويم */
+    transform: scale(1.1);
+}
+body {
+    font-family: "Cairo", sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* تنسيق بطاقة المنتج في السلة */
+.cart-item-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    transition: box-shadow 0.2s;
+}
+
+.cart-item-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.product-img-cart {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+}
+
+/* التحكم بالكمية */
+.quantity-control {
+    display: flex;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100px;
+}
+
+.quantity-btn {
+    background: #f8f9fa;
+    border: none;
+    width: 30px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.quantity-btn:hover {
+    background: #e9ecef;
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    border-right: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+/* ملخص الطلب */
+.order-summary {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    position: sticky;
+    top: 100px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #64748b;
+}
+
+.total-row {
+    border-top: 2px dashed #e2e8f0;
+    margin-top: 15px;
+    padding-top: 15px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #1e293b;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* الطبقة الخلفية المظلمة */
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* لون أسود شفاف 60% */
+    z-index: 9999; /* رقم عالي ليكون فوق كل شيء */
+    display: flex;
+    align-items: center; /* توسيط عمودي */
+    justify-content: center; /* توسيط أفقي */
+    backdrop-filter: blur(5px); /* تأثير ضبابي خفيف للخلفية */
+}
+
+/* محتوى البطاقة */
+.login-overlay-content {
+    background-color: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px; /* أقصى عرض للبطاقة */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: popIn 0.3s ease-out;
+}
+
+/* حركة ظهور بسيطة */
+@keyframes popIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* أيقونة القفل */
+.login-icon-circle {
+    width: 70px;
+    height: 70px;
+    background-color: #e0f2fe;
+    color: #0284c7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+/* ==================================================================================================== */
+body {
+    font-family: "Cairo", sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding-top: 80px; /* مساحة للـ navbar المثبت */
+    min-height: 100vh;
+}
+
+/* =========================
+   تثبيت الـ Navbar
+   ========================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9990; /* أقل من overlay */
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+/* إذا كان لديك Navbar مخصص */
+.main-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9990;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   تعديل النافذة العائمة
+   ========================= */
+.checkout-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999; /* أعلى من الـ navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    backdrop-filter: blur(3px);
+}
+
+/* حاوية الدفع - تعديل الارتفاع */
+.checkout-container {
+    background: #fff;
+    width: 100%;
+    max-width: 900px;
+    height: 85vh; /* تقليل الارتفاع قليلاً */
+    max-height: 800px; /* حد أقصى للارتفاع */
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.4s ease-out;
+    margin-top: 20px; /* مسافة من الـ navbar */
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* تنسيق الفاتورة */
+.invoice-table th {
+    font-weight: 600;
+    color: #64748b;
+    background-color: #f8fafc;
+    font-size: 0.9rem;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.invoice-table td {
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+
+/* خلاصة الأسعار */
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
+.total-row {
+    border-top: 2px dashed #cbd5e1;
+    margin-top: 10px;
+    padding-top: 10px;
+    font-weight: 800;
+    color: #1e293b;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* الخريطة */
+.map-container {
+    width: 100%;
+    height: 250px;
+    background-color: #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #cbd5e1;
+}
+
+/* شريط التمرير الداخلي */
+.checkout-scroll-area {
+    overflow-y: auto;
+    padding: 20px;
+    flex-grow: 1;
+    scroll-behavior: smooth;
+}
+
+/* تذييل النافذة */
+.checkout-footer {
+    background: #f8fafc;
+    padding: 15px 20px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* الطبقة الخلفية للنجاح */
+.success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 10000; /* أعلى من كل شيء */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* بطاقة الرسالة */
+.success-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 15px 50px rgba(16, 185, 129, 0.2);
+    border: 1px solid #ecfdf5;
+    animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* دائرة علامة الصح */
+.success-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background-color: #10b981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 3rem;
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0.2);
+    animation: scaleIn 0.5s ease-in-out;
+}
+
+/* الحركات */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* بطاقة الرصيد */
+.balance-card {
+    background: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.balance-card::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.balance-amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+/* قسم التعبئة */
+.topup-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e2e8f0;
+}
+
+.qr-placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: #f1f5f9;
+    border: 2px dashed #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 10px;
+    color: #94a3b8;
+}
+
+.barcode-display {
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 4px;
+    font-size: 1.2rem;
+    color: #333;
+    background: #f8fafc;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+/* رفع الإشعار */
+.upload-area {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    background-color: #f8fafc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upload-area:hover {
+    border-color: #3b82f6;
+    background-color: #eff6ff;
+}
+
+/* المعلومات الشخصية */
+.info-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+/* تنسيق حاوية الـ QR */
+.qr-wrapper {
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.qr-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* تنسيق صندوق الباركود */
+.barcode-box {
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 12px 20px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.barcode-box:hover {
+    border-color: #3b82f6;
+    background-color: #eff6ff;
+}
+
+.barcode-text {
+    font-family: "Courier New", monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #334155;
+    letter-spacing: 3px;
+    display: block;
+}
+
+/* =========================
+   تحسينات للأجهزة المحمولة
+   ========================= */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px; /* تقليل المسافة للموبايل */
+    }
+
+    .navbar {
+        padding: 10px 0;
+    }
+
+    .checkout-container {
+        height: 90vh;
+        margin-top: 10px;
+    }
+}
+
+/* =========================
+   تنسيق المحتوى الرئيسي
+   ========================= */
+.main-content {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================
+   تجنب تداخل المحتوى مع الـ navbar
+   ========================= */
+section,
+.container,
+.content-wrapper {
+    scroll-margin-top: 80px; /* عند التمرير للروابط الداخلية */
+}
+
+/* =========================
+   إصلاح مشكلة z-index
+   ========================= */
+.modal,
+.dropdown-menu {
+    z-index: 10001; /* أعلى من overlay */
+}
+
+/* =========================
+   تحسين تجربة المستخدم
+   ========================= */
+* {
+    box-sizing: border-box;
+}
+
+/* إخفاء شريط التمرير للمتصفحات الحديثة */
+.checkout-scroll-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.checkout-scroll-area::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.checkout-scroll-area::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.checkout-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ================================================================================================== */
+body {
+    font-family: "Cairo", sans-serif;
+    background-color: #f8fafc;
+}
+
+/* بطاقة الطلب */
+.order-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.order-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* رأس الطلب */
+.order-header {
+    background-color: #f8fafc;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-id {
+    font-weight: 700;
+    color: #334155;
+}
+
+.order-date {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* حالة الطلب */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ألوان الحالات */
+.status-pending {
+    background-color: #fef3c7;
+    color: #d97706;
+}
+
+/* أصفر - قيد المراجعة */
+.status-processing {
+    background-color: #e0f2fe;
+    color: #0284c7;
+}
+
+/* أزرق - جاري التحضير */
+.status-shipped {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+/* أزرق غامق - تم الشحن */
+.status-completed {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+/* أخضر - تم الاستلام */
+.status-cancelled {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+/* أحمر - ملغي */
+
+/* صورة المنتج المصغرة */
+.order-product-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+}
+
+.order-header {
+    /* ... باقي التنسيقات ... */
+    cursor: pointer;
+    /* هذا السطر مهم */
+    transition: background-color 0.2s;
+}
+
+/* تأثير بسيط عند التحويم */
+.order-header:hover {
+    background-color: #f1f5f9;
+    /* لون رمادي فاتح جداً */
+}
+/* =========================================
+ كود CSS المخصص للفشل (أضفه لملف التنسيقات) 
+ =========================================  */
+
+/* الطبقة الخلفية (نفس النجاح لكن يمكن تغيير اللون إذا أردت) */
+.fail-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* بطاقة الرسالة */
+.fail-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 15px 50px rgba(220, 38, 38, 0.2); /* ظل أحمر خفيف */
+    border: 1px solid #fee2e2;
+    animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* دائرة علامة X */
+.fail-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background-color: #dc2626; /* أحمر داكن */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 3rem;
+    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0.2);
+    animation: shake 0.5s ease-in-out; /* حركة اهتزاز للتعبير عن الخطأ */
+}
+
+/* حركة الاهتزاز */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* تنسيق بطاقة القسم */
+.category-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+}
+
+/* تأثير عند مرور الماوس */
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: #3b82f6;
+}
+
+/* حاوية الصورة */
+.category-img-wrapper {
+    position: relative;
+    padding-top: 75%;
+    /* نسبة ارتفاع 3:4 */
+    overflow: hidden;
+    background-color: #f1f5f9;
+}
+
+.category-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.category-card:hover .category-img {
+    transform: scale(1.1);
+    /* تكبير الصورة عند التحويم */
+}
+
+/* اسم القسم */
+.category-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.category-title-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* عدد المنتجات (اختياري) */
+.item-count {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #334155;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: "Cairo", sans-serif;
+    background-color: #f8fafc;
+}
+
+/* ===========================
+       شريط الفتات (Breadcrumbs)
+       =========================== */
+.breadcrumb-area {
+    background-color: #fff;
+    padding: 15px 0;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 30px;
+}
+
+/* ===========================
+       الشريط الجانبي (Sidebar Filters)
+       =========================== */
+.filter-sidebar {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.filter-group-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f5f9;
+    color: #334155;
+}
+
+.filter-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.filter-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.filter-item:hover {
+    background-color: #f8fafc;
+}
+
+.filter-item.active {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: 600;
+}
+.countdown-box {
+    background-color: #1f2937;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+:root {
+    --primary-color: #0d6efd;
+    /* اللون الأساسي - يمكنك تغييره */
+    --secondary-color: #f8f9fa;
+    --text-color: #333;
+}
+
+/* تنسيق الهيدر (Hero Section) */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("https://via.placeholder.com/1920x600/0d6efd/ffffff?text=Store+Background");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* تنسيق الأقسام */
+.section-padding {
+    padding: 80px 0;
+}
+
+.bg-light-gray {
+    background-color: var(--secondary-color);
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* بطاقات الخدمات */
+.feature-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+    height: 100%;
+    text-align: center;
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+}
+
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    background: rgba(13, 110, 253, 0.1);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 0 auto 20px;
+}
+
+/* صورة الفريق */
+.team-img {
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* العدادات */
+.counter-box {
+    text-align: center;
+}
+
+.counter-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* تنسيق بطاقة الملف الشخصي */
+.profile-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 120px;
+}
+
+.profile-img-container {
+    margin-top: -60px;
+    position: relative;
+    display: inline-block;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    object-fit: cover;
+    background-color: #eee;
+}
+
+.upload-btn {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: #fff;
+    color: #333;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border: none;
+}
+
+.upload-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.1);
+}
+
+/* تنسيق الرصيد */
+.balance-box {
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+/* تنسيق التبويبات والنماذج */
+.settings-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+.nav-pills .nav-link {
+    color: #666;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #667eea;
+    color: #fff;
+}
+
+.nav-pills .nav-link i {
+    margin-left: 8px;
+}
+
+/* إخفاء زر رفع الملف الافتراضي */
+#fileInput {
+    display: none;
+}
+
+/* 2. النافذة عالية الشفافية وأقصر */
+.glass-card {
+    background: rgba(255, 255, 255, 0.5);
+    /* شفافية قوية جداً (50% فقط) */
+    backdrop-filter: blur(5px);
+    /* ضبابية أقل لزيادة الشعور بالشفافية */
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 6px;
+    /* زوايا مستطيلة */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(21, 101, 192, 0.15);
+    color: #0d47a1;
+    padding: 20px 30px;
+    /* تقليل الحشو العمودي (Top/Bottom) ليكون أقصر */
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 450px;
+    /* زيادة العرض لجعله أعرض من الارتفاع */
+    margin: 40px;
+}
+
+.glass-card h2,
+.glass-card label {
+    color: #0d47a1;
+    font-weight: 700;
+}
+
+.glass-card h2 {
+    margin-bottom: 5px;
+}
+
+/* تقليل المسافة تحت العنوان */
+
+/* 3. الحقول */
+.input-group-custom {
+    margin-bottom: 12px;
+    /* تقريب العناصر من بعضها */
+}
+
+.form-control-glass {
+    width: 100%;
+    background: rgba(238, 242, 246, 0.4);
+    border: 1px solid #bbdefb;
+    border-radius: 6px;
+    padding: 8px 40px 8px 15px;
+    /* تقليل ارتفاع الحقل (Padding) */
+    color: #0d47a1;
+    font-size: 0.9rem;
+    background-size: 18px;
+    background-repeat: no-repeat;
+    /* التعديل هنا: وضع الأيقونة في اليمين */
+    background-position: right 12px center;
+    transition: all 0.3s;
+}
+
+.form-control-glass::placeholder {
+    color: #78909c;
+}
+
+.form-control-glass:focus {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    outline: none;
+}
+
+/* تعريف الأيقونات (أزرق) */
+.input-name {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' fill='%231976d2'%3E%3Cpath d='M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z'/%3E%3C/svg%3E");
+}
+
+.input-email {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%231976d2'%3E%3Cpath d='M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z'/%3E%3C/svg%3E");
+}
+
+.input-lock {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' fill='%231976d2'%3E%3Cpath d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'/%3E%3C/svg%3E");
+}
+
+.input-check {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%231976d2'%3E%3Cpath d='M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z'/%3E%3C/svg%3E");
+}
+
+/* الزر */
+.btn-register {
+    background: linear-gradient(45deg, #1976d2, #1565c0);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    /* تقليل ارتفاع الزر ليكون متناسقاً مع الحقول */
+    font-weight: bold;
+    font-size: 0.95rem;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* الشعار */
+.logo-icon {
+    font-size: 2.5rem;
+    /* تصغير الشعار قليلاً */
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+/* رسائل الخطأ */
+.text-danger-custom {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    margin-top: 2px;
+    margin-right: 5px;
+}
+
+/* 2. النافذة عالية الشفافية وأقصر */
+.glass-card {
+    background: rgba(255, 255, 255, 0.5);
+    /* شفافية قوية */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 6px;
+    /* مستطيلة */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(21, 101, 192, 0.15);
+    color: #0d47a1;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px;
+}
+
+.glass-card h2,
+.glass-card label {
+    color: #0d47a1;
+    font-weight: 700;
+}
+
+.glass-card h2 {
+    margin-bottom: 5px;
+}
+
+/* 3. الحقول */
+.input-group-custom {
+    margin-bottom: 12px;
+}
+
+.form-control-glass {
+    width: 100%;
+    background: rgba(238, 242, 246, 0.4);
+    border: 1px solid #bbdefb;
+    border-radius: 6px;
+    padding: 8px 40px 8px 15px;
+    color: #0d47a1;
+    font-size: 0.9rem;
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    /* أيقونات من اليمين */
+    transition: all 0.3s;
+}
+
+.form-control-glass::placeholder {
+    color: #78909c;
+}
+
+.form-control-glass:focus {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    outline: none;
+}
+
+/* أيقونات */
+.input-email {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%231976d2'%3E%3Cpath d='M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z'/%3E%3C/svg%3E");
+}
+
+.input-lock {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' fill='%231976d2'%3E%3Cpath d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'/%3E%3C/svg%3E");
+}
+
+/* الزر */
+.btn-login {
+    background: linear-gradient(45deg, #1976d2, #1565c0);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* الشعار */
+.logo-icon {
+    font-size: 2.5rem;
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+/* رسائل الخطأ */
+.text-danger-custom {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    margin-top: 2px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+/* 2. النافذة عالية الشفافية وأقصر */
+.glass-card {
+    background: rgba(255, 255, 255, 0.5);
+    /* شفافية قوية */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 6px;
+    /* مستطيلة */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(21, 101, 192, 0.15);
+    color: #0d47a1;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px;
+}
+
+.glass-card h2,
+.glass-card label {
+    color: #0d47a1;
+    font-weight: 700;
+}
+
+.glass-card h2 {
+    margin-bottom: 5px;
+}
+
+/* 3. الحقول */
+.input-group-custom {
+    margin-bottom: 12px;
+}
+
+.form-control-glass {
+    width: 100%;
+    background: rgba(238, 242, 246, 0.4);
+    border: 1px solid #bbdefb;
+    border-radius: 6px;
+    padding: 8px 40px 8px 15px;
+    color: #0d47a1;
+    font-size: 0.9rem;
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    /* أيقونات من اليمين */
+    transition: all 0.3s;
+}
+
+.form-control-glass::placeholder {
+    color: #78909c;
+}
+
+.form-control-glass:focus {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    outline: none;
+}
+
+/* أيقونات */
+.input-email {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%231976d2'%3E%3Cpath d='M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z'/%3E%3C/svg%3E");
+}
+
+/* الزر */
+.btn-submit {
+    background: linear-gradient(45deg, #1976d2, #1565c0);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* الشعار */
+.logo-icon {
+    font-size: 2.5rem;
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+/* رسائل الخطأ */
+.text-danger-custom {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    margin-top: 2px;
+    margin-right: 5px;
+    text-align: center;
+}
+/* 2. النافذة عالية الشفافية وأقصر */
+.glass-card {
+    background: rgba(255, 255, 255, 0.5); /* شفافية قوية */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 6px; /* مستطيلة */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(21, 101, 192, 0.15);
+    color: #0d47a1;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px;
+}
+
+.glass-card h2,
+.glass-card label {
+    color: #0d47a1;
+    font-weight: 700;
+}
+
+.glass-card h2 {
+    margin-bottom: 5px;
+}
+
+/* 3. الحقول */
+.input-group-custom {
+    margin-bottom: 12px;
+}
+
+.form-control-glass {
+    width: 100%;
+    background: rgba(238, 242, 246, 0.4);
+    border: 1px solid #bbdefb;
+    border-radius: 6px;
+    padding: 8px 40px 8px 15px;
+    color: #0d47a1;
+    font-size: 0.9rem;
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: right 12px center; /* أيقونات من اليمين */
+    transition: all 0.3s;
+}
+
+.form-control-glass::placeholder {
+    color: #78909c;
+}
+
+.form-control-glass:focus {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    outline: none;
+}
+
+/* أيقونات */
+.input-lock {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' fill='%231976d2'%3E%3Cpath d='M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z'/%3E%3C/svg%3E");
+}
+.input-check {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%231976d2'%3E%3Cpath d='M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z'/%3E%3C/svg%3E");
+}
+
+/* الزر */
+.btn-submit {
+    background: linear-gradient(45deg, #1976d2, #1565c0);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* الشعار */
+.logo-icon {
+    font-size: 2.5rem;
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+/* رسائل الخطأ */
+.text-danger-custom {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    margin-top: 2px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+/* الحاوية العامة للحالة */
+.account-status-box {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* بطاقة الحالة */
+.status-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* دائرة الأيقونة */
+.status-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+
+/* نصوص الحالة */
+.status-content {
+    flex-grow: 1;
+}
+
+.status-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.status-subtitle {
+    font-size: 0.75rem;
+}
+
+/* أيقونة الدرج (Action Icon) */
+.status-action {
+    font-size: 1.1rem;
+    opacity: 0.7;
+}
+
+/* الألوان الخلفية الخفيفة */
+.bg-light-success {
+    background-color: #d1e7dd;
+}
+
+.bg-light-danger {
+    background-color: #f8d7da;
+}
+
+/* زر التفعيل */
+.btn-verify-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 6px rgba(220, 53, 69, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-verify-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+    color: #fff;
+}
+
+/* 2. النافذة عالية الشفافية وأقصر */
+.glass-card {
+    background: rgba(255, 255, 255, 0.5);
+    /* شفافية قوية */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 6px;
+    /* مستطيلة */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(21, 101, 192, 0.15);
+    color: #0d47a1;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px;
+}
+
+.glass-card h2 {
+    color: #0d47a1;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/* الأزرار */
+.btn-submit {
+    background: linear-gradient(45deg, #1976d2, #1565c0);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);
+    transition: transform 0.2s;
+    margin-bottom: 10px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.btn-logout {
+    background: rgba(255, 255, 255, 0.4);
+    color: #0d47a1;
+    border: 1px solid #90a4ae;
+    border-radius: 6px;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.btn-logout:hover {
+    background: rgba(255, 255, 255, 0.7);
+    color: #d32f2f;
+    border-color: #d32f2f;
+}
+
+/* الشعار */
+.logo-icon {
+    font-size: 2.5rem;
+    color: #1565c0;
+    margin-bottom: 5px;
+}
