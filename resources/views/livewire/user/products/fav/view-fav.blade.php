@@ -4,7 +4,6 @@
         <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-4">
             <div>
                 <h2 class="fw-bold mb-1">عناصر المفضلة</h2>
-                <p class="text-muted small mb-0">لديك 3 منتجات في قائمتك</p>
             </div>
             <button wire:click.prevent='clearFav' class="btn btn-outline-danger btn-sm rounded-pill px-4">
                 <i class="bi bi-trash me-1"></i> إفراغ القائمة
