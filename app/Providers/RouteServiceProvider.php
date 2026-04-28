@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        URL::forceScheme('https');
         // Limit::perMinute(3);   //ثلالث محاولات في الدقيقة 
         // Limit::perHour(100);   //مئة محاولة في الساعة 
 
