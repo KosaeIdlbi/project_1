@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         // $this->call([ImgSeeder::class]);
         // $this->call([ProductStatusSeeder::class]);
         // $this->call([PermissionsSeeder::class]);
-        $this->call(AdminSeeder::class);
+        // $this->call(AdminSeeder::class);
     }
 }
