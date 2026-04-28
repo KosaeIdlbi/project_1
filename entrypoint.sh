@@ -17,7 +17,7 @@ echo "Database connected!"
 
 # --- 3. إعداد Laravel ---
 echo "Running migrations..."
-php artisan migrate:reset
+php artisan migrate:fresh --force
 php artisan migrate --force
 
 echo "Running seeders..."
@@ -32,6 +32,8 @@ php artisan route:cache
 php artisan view:cache
 
 # --- 4. بدء الخدمات ---
+npm run dev
+
 echo "Starting Queue Worker..."
 php artisan queue:work --tries=3 --sleep=3 --timeout=60 &
 
