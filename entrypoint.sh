@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # --- 1. إصلاح الصلاحيات ---
 echo "Fixing storage permissions..."
 if [ -f /var/www/html/storage/logs/laravel.log ]; then
@@ -21,8 +23,9 @@ echo "Database connected!"
 # php artisan db:seed --force
 
 # --- 5. تشغيل الخدمات في الخلفية ---
-php artisan queue:work --daemon &
-php artisan reverb:start --debug &
+php artisan queue:work &
+php artisan reverb:start &
+# npm run dev &
 
 # --- 6. تشغيل الخادم الرئيسي ---
 # php artisan serve --host=0.0.0.0 --port=8000
