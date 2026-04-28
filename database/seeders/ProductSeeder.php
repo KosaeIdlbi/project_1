@@ -10,11 +10,8 @@ use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use function fake;
-
 class ProductSeeder extends Seeder
 {
-
 
     private function getTagForCategory($categoryName)
     {
@@ -182,7 +179,7 @@ class ProductSeeder extends Seeder
                 for ($s = 0; $s < $specCount; $s++) {
                     $specs[] = [
                         "name" => $specNames[array_rand($specNames)],
-                        "desc" => fake()->word() . " " . rand(1, 100)
+                        "desc" => \Faker\Factory::create()->word() . " " . rand(1, 100)
                     ];
                 }
                 break;
@@ -199,6 +196,7 @@ class ProductSeeder extends Seeder
     }
     public function run(): void
     {
+        $fake = \Faker\Factory::create();
         // في حلقة إنشاء المنتجات
         for ($i = 1; $i <= 500; $i++) {
             $category = Catigory::inRandomOrder()->first();
@@ -206,15 +204,15 @@ class ProductSeeder extends Seeder
             $tag = $this->getTagForCategory($category->name);
 
             $product = Product::create([
-                "name" => $tag->name . " " . fake()->numberBetween(1, 1000),
-                "desc" => fake()->paragraph(2),
-                "price" => fake()->numberBetween(500, 50000),
-                "offer_price" => fake()->boolean(30) ? fake()->numberBetween(300, 40000) : null,
+                "name" => $tag->name . " " . $fake->numberBetween(1, 1000),
+                "desc" => $fake->paragraph(2),
+                "price" => $fake->numberBetween(500, 50000),
+                "offer_price" => $fake->boolean(30) ? $fake->numberBetween(300, 40000) : null,
                 "catigory_id" => $category->id,
                 "tag_id" => $tag->id,
                 "brand_id" => $brand->id,  // الآن الماركة مناسبة للقسم
-                "quantity" => fake()->numberBetween(20, 200),
-                "able_to_buy_quantity" => fake()->numberBetween(1, 20),
+                "quantity" => $fake->numberBetween(20, 200),
+                "able_to_buy_quantity" => $fake->numberBetween(1, 20),
             ]);
 
             $this->addSpecifications($product, $tag->name);
