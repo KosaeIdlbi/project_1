@@ -39,6 +39,9 @@ COPY . /var/www/html
 # تثبيت مكتبات PHP
 RUN composer install --optimize-autoloader --no-dev --no-interaction
 
+# ✅ إضافة: تثبيت Faker كحزمة تطوير
+RUN composer require --dev fakerphp/faker --no-interaction
+
 # بناء التنسيقات (Assets) باستخدام Vite
 # RUN npm install && npm run build
 
@@ -66,7 +69,6 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # نقطة الدخول
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
 
 # الأمر الافتراضي لتشغيل Apache
 CMD ["apache2-foreground"]
