@@ -46,6 +46,7 @@ chmod -R 777 /var/www/html/bootstrap/cache
 
 # --- 2. الانتظار للاتصال بقاعدة البيانات ---
 echo "Waiting for database connection..."
+# حلقة تكرار حتى ينجح الاتصال
 until php -r "try { new PDO('pgsql:host=${DB_HOST};dbname=${DB_DATABASE}', '${DB_USERNAME}', '${DB_PASSWORD}'); echo 'OK'; } catch (Exception \$e) { echo 'WAIT'; exit(1); }" | grep OK > /dev/null; do
     echo "Database is unavailable - sleeping"
     sleep 3
