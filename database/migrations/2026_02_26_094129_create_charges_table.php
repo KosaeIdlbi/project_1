@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('charges', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained("users")->cascadeOnDelete();
-            $table->foreignId("admin_id")->constrained("admins")->nullable(true);
+            $table->foreignId("admin_id")->constrained("admins")->default(null);
             $table->double("amount");
             $table->string("transcation_number"); //bank app transfer transcation number
             $table->enum("charge_status", ["denied", "success", "waiting", "received"]);

@@ -17,10 +17,10 @@ echo "Database connected!"
 
 # --- 3. إعداد Laravel ---
 echo "Running migrations..."
-# php artisan migrate --force
+php artisan migrate:refresh --force
 
 echo "Running seeders..."
-# php artisan db:seed --force -v || true
+php artisan db:seed --force -v || true
 
 echo "Linking storage..."
 php artisan storage:link
