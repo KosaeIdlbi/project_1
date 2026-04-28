@@ -28,13 +28,13 @@ echo "Database connected!"
 
 # --- 6. بدء الخدمات في الخلفية ---
 echo "Starting Queue Worker..."
-php artisan queue:work &
+php artisan queue:work 
 
 echo "Starting Reverb Server..."
-php artisan reverb:start --debug &
+php artisan reverb:start --debug 
 
 echo "Starting NPM Development Server..."
-npm run dev &
+npm run dev 
 
 echo "Starting server..."
 
