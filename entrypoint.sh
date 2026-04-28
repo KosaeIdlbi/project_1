@@ -31,7 +31,7 @@ echo "Starting Queue Worker..."
 php artisan queue:work 
 
 echo "Starting Reverb Server..."
-php artisan reverb:start --debug 
+php artisan reverb:start 
 
 echo "Starting NPM Development Server..."
 npm run dev 
