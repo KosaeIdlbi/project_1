@@ -1,42 +1,5 @@
-#!/bin/bash
-
-# --- 1. إصلاح مشكلة الصلاحيات للملفات الحية ---
-# هذا الأمر ضروري لمنع خطأ "Permission denied" في ملف laravel.log
-echo "Fixing storage permissions..."
-if [ -f /var/www/html/storage/logs/laravel.log ]; then
-    chmod 777 /var/www/html/storage/logs/laravel.log
-fi
-chmod -R 777 /var/www/html/storage
-chmod -R 777 /var/www/html/bootstrap/cache
-
-# --- 2. الانتظار للاتصال بقاعدة البيانات ---
-echo "Waiting for database connection..."
-# حلقة تكرار حتى ينجح الاتصال
-until php -r "try { new PDO('pgsql:host=${DB_HOST};dbname=${DB_DATABASE}', '${DB_USERNAME}', '${DB_PASSWORD}'); echo 'OK'; } catch (Exception \$e) { echo 'WAIT'; exit(1); }" | grep OK > /dev/null; do
-    echo "Database is unavailable - sleeping"
-    sleep 3
-done
-echo "Database connected!"
-
-# --- 3. تشغيل المهاجرات (Migrations) ---
-# echo "Running migrations..."
-# php artisan migrate --force
-
-# --- 4. تشغيل البذور (Seeders) ---
-# أضفنا || true لاستمرار العمل حتى لو حدث خطأ في الـ Seed (لتجنب مشاكل البيانات المكررة)
-# echo "Running seeders..."
-# php artisan db:seed --force -v || true
-
-echo "Starting server..."
-
-# --- 5. تشغيل الأمر الرئيسي للحاوية ---
-exec "$@"
-
-
-
-# #!/bin/bash
-
 # # --- 1. إصلاح مشكلة الصلاحيات للملفات الحية ---
+# # هذا الأمر ضروري لمنع خطأ "Permission denied" في ملف laravel.log
 # echo "Fixing storage permissions..."
 # if [ -f /var/www/html/storage/logs/laravel.log ]; then
 #     chmod 777 /var/www/html/storage/logs/laravel.log
@@ -46,6 +9,7 @@ exec "$@"
 
 # # --- 2. الانتظار للاتصال بقاعدة البيانات ---
 # echo "Waiting for database connection..."
+# # حلقة تكرار حتى ينجح الاتصال
 # until php -r "try { new PDO('pgsql:host=${DB_HOST};dbname=${DB_DATABASE}', '${DB_USERNAME}', '${DB_PASSWORD}'); echo 'OK'; } catch (Exception \$e) { echo 'WAIT'; exit(1); }" | grep OK > /dev/null; do
 #     echo "Database is unavailable - sleeping"
 #     sleep 3
@@ -53,30 +17,38 @@ exec "$@"
 # echo "Database connected!"
 
 # # --- 3. تشغيل المهاجرات (Migrations) ---
-# # echo "Running migrations..."
-# # php artisan migrate --force
+# echo "Running migrations..."
+# php artisan migrate --force
 
 # # --- 4. تشغيل البذور (Seeders) ---
-# # echo "Running seeders..."
-# # php artisan db:seed --force -v || true
+# # أضفنا || true لاستمرار العمل حتى لو حدث خطأ في الـ Seed (لتجنب مشاكل البيانات المكررة)
+# echo "Running seeders..."
+# php artisan db:seed --force -v || true
 
-# # --- 5. تنظيف Cache ---
-# echo "Clearing cache..."
-# php artisan config:clear
-# php artisan cache:clear
-# php artisan view:clear
-# php artisan route:clear
+# echo "Starting server..."
 
-# # --- 6. بدء الخدمات في الخلفية ---
-# echo "Starting Queue Worker..."
-# php artisan queue:work --tries=3 --sleep=3 --timeout=60 &
+# # --- 5. تشغيل الأمر الرئيسي للحاوية ---
+# exec "$@"
 
-# echo "Starting Reverb Server..."
-# php artisan reverb:start --debug &
 
-# echo "Starting NPM Development Server..."
-# npm run dev &
+#!/bin/bash
+set -e
 
-# # --- 7. انتظار جميع العمليات ---
-# echo "All services started. Keeping container alive..."
-# wait
+echo "Setting permissions..."
+chmod 777 /var/www/html/storage/logs/laravel.log
+chmod -R 777 /var/www/html/storage
+chmod -R 777 /var/www/html/bootstrap/cache
+
+echo "Waiting for database..."
+sleep 5
+
+echo "Clearing cache..."
+php artisan optimize:clear
+
+echo "Starting services..."
+php artisan queue:work --tries=3 --sleep=3 --timeout=60 &
+php artisan reverb:start --debug &
+npm run dev &
+
+echo "All services running."
+wait
