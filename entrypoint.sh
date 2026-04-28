@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# --- 1. إصلاح مشكلة الصلاحيات للملفات الحية ---
+# --- 1. إصلاح الصلاحيات ---
 echo "Fixing storage permissions..."
-if [ -f /var/www/html/storage/logs/laravel.log ]; then
-    chmod 777 /var/www/html/storage/logs/laravel.log
-fi
+mkdir -p /var/www/html/storage/logs
+mkdir -p /var/www/html/bootstrap/cache
 chmod -R 777 /var/www/html/storage
 chmod -R 777 /var/www/html/bootstrap/cache
 
-# --- 2. الانتظار للاتصال بقاعدة البيانات ---
+# --- 2. الانتظار لقاعدة البيانات ---
 echo "Waiting for database connection..."
 until php -r "try { new PDO('pgsql:host=${DB_HOST};dbname=${DB_DATABASE}', '${DB_USERNAME}', '${DB_PASSWORD}'); echo 'OK'; } catch (Exception \$e) { echo 'WAIT'; exit(1); }" | grep OK > /dev/null; do
     echo "Database is unavailable - sleeping"
@@ -16,31 +15,32 @@ until php -r "try { new PDO('pgsql:host=${DB_HOST};dbname=${DB_DATABASE}', '${DB
 done
 echo "Database connected!"
 
-# --- 3. تشغيل المهاجرات (Migrations) ---
+# --- 3. إعداد Laravel ---
 echo "Running migrations..."
-# php artisan migrate --force
+php artisan migrate --force
 
-# --- 4. تشغيل البذور (Seeders) ---
 echo "Running seeders..."
-# php artisan db:seed --force -v || true
+php artisan db:seed --force -v || true
 
-# --- 5. تنظيف Cache ---
-echo "Clearing cache..."
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
-php artisan route:clear
+echo "Linking storage..."
+php artisan storage:link
 
-# --- 6. بدء الخدمات في الخلفية ---
+echo "Optimizing..."
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# --- 4. بدء الخدمات ---
 echo "Starting Queue Worker..."
 php artisan queue:work --tries=3 --sleep=3 --timeout=60 &
 
 echo "Starting Reverb Server..."
 php artisan reverb:start --debug &
 
-echo "Starting NPM Development Server..."
-npm run dev &
+# --- 5. بدء Laravel Dev Server (لحل page not found) ---
+echo "Starting Laravel Development Server..."
+php artisan serve --host=0.0.0.0 --port=8000 &
 
-# --- 7. انتظار جميع العمليات ---
+# --- 6. الانتظار ---
 echo "All services started. Keeping container alive..."
 wait
