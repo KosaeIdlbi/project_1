@@ -120,37 +120,6 @@ RUN chmod -R 775 /var/www/html/storage \
 # ============================================
 # 10. إنشاء Entrypoint Script
 # ============================================
-RUN echo '#!/bin/bash' > /usr/local/bin/entrypoint.sh && \
-    echo '' >> /usr/local/bin/entrypoint.sh && \
-    echo '# إنشاء المجلدات المطلوبة' >> /usr/local/bin/entrypoint.sh && \
-    echo 'mkdir -p /var/log/supervisor' >> /usr/local/bin/entrypoint.sh && \
-    echo 'mkdir -p /var/www/html/storage/logs' >> /usr/local/bin/entrypoint.sh && \
-    echo '' >> /usr/local/bin/entrypoint.sh && \
-    echo '# إعداد الصلاحيات مرة أخرى للتأكد' >> /usr/local/bin/entrypoint.sh && \
-    echo 'chown -R www-data:www-data /var/www/html/storage' >> /usr/local/bin/entrypoint.sh && \
-    echo 'chown -R www-data:www-data /var/www/html/bootstrap/cache' >> /usr/local/bin/entrypoint.sh && \
-    echo '' >> /usr/local/bin/entrypoint.sh && \
-    echo '# تنظيف الـ Cache' >> /usr/local/bin/entrypoint.sh && \
-    echo 'php artisan config:clear' >> /usr/local/bin/entrypoint.sh && \
-    echo 'php artisan cache:clear' >> /usr/local/bin/entrypoint.sh && \
-    echo 'php artisan view:clear' >> /usr/local/bin/entrypoint.sh && \
-    echo '' >> /usr/local/bin/entrypoint.sh && \
-    echo '# تشغيل الـ Migrations إذا طُلب ذلك' >> /usr/local/bin/entrypoint.sh && \
-    echo 'if [ "$RUN_MIGRATIONS" = "true" ]; then' >> /usr/local/bin/entrypoint.sh && \
-    echo '    echo "Running migrations..."' >> /usr/local/bin/entrypoint.sh && \
-    echo '    php artisan migrate --force' >> /usr/local/bin/entrypoint.sh && \
-    echo 'fi' >> /usr/local/bin/entrypoint.sh && \
-    echo '' >> /usr/local/bin/entrypoint.sh && \
-    echo '# تشغيل الـ Seeders إذا طُلب ذلك' >> /usr/local/bin/entrypoint.sh && \
-    echo 'if [ "$RUN_SEEDERS" = "true" ]; then' >> /usr/local/bin/entrypoint.sh && \
-    echo '    echo "Running seeders..."' >> /usr/local/bin/entrypoint.sh && \
-    echo '    php artisan db:seed --force' >> /usr/local/bin/entrypoint.sh && \
-    echo 'fi' >> /usr/local/bin/entrypoint.sh && \
-    echo '' >> /usr/local/bin/entrypoint.sh && \
-    echo '# بدء Supervisor لإدارة جميع الخدمات' >> /usr/local/bin/entrypoint.sh && \
-    echo 'echo "Starting Supervisor with all services (Apache, npm dev, queue, reverb)..."' >> /usr/local/bin/entrypoint.sh && \
-    echo 'exec /usr/bin/supervisord -n -c /etc/supervisor/conf.d/supervisord.conf' >> /usr/local/bin/entrypoint.sh
-
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # ============================================
