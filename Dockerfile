@@ -43,7 +43,7 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction
 RUN composer require --dev fakerphp/faker --no-interaction
 
 # بناء التنسيقات (Assets) باستخدام Vite
-RUN npm install && npm run build
+# RUN npm install && npm run build
 
 # إنشاء رابط التخزين
 RUN php artisan storage:link

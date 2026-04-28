@@ -34,15 +34,14 @@ php artisan view:cache
 # --- 4. بدء الخدمات ---
 npm run dev
 
-echo "Starting Queue Worker..."
-php artisan queue:work --tries=3 --sleep=3 --timeout=60 &
+echo "Starting Laravel Development Server..."
+php artisan serve --host=0.0.0.0 --port=8000 &
 
 echo "Starting Reverb Server..."
 php artisan reverb:start --debug &
 
-# --- 5. بدء Laravel Dev Server (لحل page not found) ---
-echo "Starting Laravel Development Server..."
-php artisan serve --host=0.0.0.0 --port=8000 &
+echo "Starting Queue Worker..."
+php artisan queue:work --tries=3 --sleep=3 --timeout=60 &
 
 # --- 6. الانتظار ---
 echo "All services started. Keeping container alive..."
