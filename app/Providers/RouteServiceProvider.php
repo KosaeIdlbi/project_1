@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        URL::forceScheme('https');
+        // URL::forceScheme('https');
         // Limit::perMinute(3);   //ثلالث محاولات في الدقيقة 
         // Limit::perHour(100);   //مئة محاولة في الساعة 
 

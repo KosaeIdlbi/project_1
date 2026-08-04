@@ -43,6 +43,7 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction
 RUN composer require --dev fakerphp/faker --no-interaction
 
 # بناء التنسيقات (Assets) باستخدام Vite
+# RUN npm install --save-dev laravel-echo pusher-js
 # RUN npm install && npm run build
 
 # إنشاء رابط التخزين
