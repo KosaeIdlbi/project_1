@@ -33,7 +33,7 @@
             </form>
             <div class="mg-t-60 tx-center">Not yet a member? <a href={{ route('admin.register.create') }}
                     class="tx-info">register</a></div>
-            <div class="mg-t-20 tx-center">back to <a href="/">home</a></div>
+            {{-- <div class="mg-t-20 tx-center">back to <a href="/">home</a></div> --}}
         </div><!-- login-wrapper -->
     </div><!-- d-flex -->
 @endsection

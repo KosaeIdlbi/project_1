@@ -41,7 +41,7 @@
             <div class="mg-t-40 tx-center">Already have an account? <a href={{ route('admin.login.create') }}
                     class="tx-info">login</a>
             </div>
-            <div class="mg-t-20 tx-center">back to <a href="/">home</a></div>
+            {{-- <div class="mg-t-20 tx-center">back to <a href="/">home</a></div> --}}
         </div><!-- login-wrapper -->
     </div><!-- d-flex -->
 @endsection

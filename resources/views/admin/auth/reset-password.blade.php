@@ -24,7 +24,7 @@
                 </div>
                 <button type="submit" class="btn btn-info btn-block">update</button>
             </form>
-            <div class="mg-t-20 tx-center">back to <a href="/">home</a></div>
+            {{-- <div class="mg-t-20 tx-center">back to <a href="/">home</a></div> --}}
         </div><!-- login-wrapper -->
     </div><!-- d-flex -->
 @endsection
