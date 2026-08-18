@@ -71,7 +71,7 @@ class Product extends Model
                 ->where("created_at", ">=", Carbon::parse($CreatedAt))->orderBy("created_at", $sortAs)
                 ->where("updated_at", ">=", Carbon::parse($UpdatedAt))->orderBy("updated_at", $sortAs)
                 ->where("price", '<=', $Price)->orderBy("price", "desc")
-                ->simplePaginate(9);
+                ->Paginate(9);
         } else {
             return Product::with(["imgs", "catigory", "brand", "tag", "specifications"])->whereHas("catigory", function ($query) use ($CatigoryName) {
                 $query->where("name", "like", "%" . $CatigoryName . "%");
@@ -88,7 +88,7 @@ class Product extends Model
                 ->where("has_offer", "like", "%" . $WithoutOffers . "%")
                 ->where("created_at", ">=", Carbon::parse($CreatedAt))->orderBy("created_at", $sortAs)
                 ->where("updated_at", ">=", Carbon::parse($UpdatedAt))->orderBy("updated_at", $sortAs)
-                ->simplePaginate(9);
+                ->Paginate(9);
         }
     }
     public function imgs()
