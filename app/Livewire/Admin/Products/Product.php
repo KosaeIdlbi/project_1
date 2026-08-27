@@ -249,9 +249,9 @@ class Product extends Component
     }
     public function destroy()
     {
-        foreach ($this->product->imgs as $img) {
-            Storage::disk('products')->delete($img->path);
-        }
+        // foreach ($this->product->imgs as $img) {
+        //     Storage::disk('products')->delete($img->path);
+        // }
         $this->product->imgs()->delete();
         $this->product->delete();
         $this->show = "deleted";
